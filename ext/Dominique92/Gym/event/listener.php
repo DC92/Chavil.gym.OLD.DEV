@@ -7,13 +7,13 @@
  */
 
 /*
+//TODO c'est quoi submenu.html ?
 //TODO masquer les sous-menus sauf la page vue / survol / ouverture lente
 //TODO purger les [resume] et textes des pages seances
 //TODO bandeau accueil déroulé sauf pages
 //BUG null au dessus d'une carte sur IE
 //APRES planning mercredi + dimanche même page
 //APRES enlever horaire du menu / réordonner menu
-//BEST pavés du menu de la stricte taille nécéssaire
 //BEST lien document => download au lieu d'afficher
 
 //BEST

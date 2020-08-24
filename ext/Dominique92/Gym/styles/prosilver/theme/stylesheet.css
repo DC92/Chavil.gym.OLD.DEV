@@ -255,32 +255,28 @@ body {
 }
 
 /* Menu accueil et sous-menu pages */
-.menubandeau {
+.menu {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
 }
-.titi {
-	margin-top: 1em;
-	padding: 0;
+.menu div {
+	display: inline-block;
+	margin: 0.5em;
+	border-radius: 0.5em;
+	padding: 0.5em;
 }
-.menubandeau label {
+.menu label {
 	display: block;
 	margin: -0.5em -0.5em 0.1em -0.5em;
 	border-radius: 0.5em;
 	padding: 0.2em;
 	color: white;
 }
-.menubandeau > li {
-	display: inline-block;
-	margin: 0.5em;
-	border-radius: 0.5em;
-	padding: 0.5em;
-}
-.menubandeau ul {
+.menu ul {
 	padding: 0;
 }
-.menubandeau ul li {
+.menu li {
 	list-style: none;
 }
 
