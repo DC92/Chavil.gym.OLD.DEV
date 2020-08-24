@@ -149,7 +149,7 @@
 	<!-- SUJET -->
 	<!-- BEGIN postrow -->
 		<!-- IF postrow.POST_ID == REQUEST_P -->
-			<h2>
+			<h1>
 				{postrow.POST_SUBJECT}
 				<!-- IF U_MCP -->
 					<a href="posting.php?mode=edit&f=2&p={postrow.POST_ID}"
@@ -157,7 +157,7 @@
 						<i class="icon fa-pencil"></i>
 					</a>
 				<!-- ENDIF -->
-			</h2>
+			</h1>
 			<div>{postrow.MESSAGE}</div>
 			<!-- IF postrow.GYM_CERT -->
 				<div>

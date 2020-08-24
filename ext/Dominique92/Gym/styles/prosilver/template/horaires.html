@@ -16,7 +16,12 @@
 		<tr>
 			<!-- IF not REQUEST_ID -->
 			<td>
-				<a href="viewtopic.php?p={post.POST_ID}">{post.POST_SUBJECT}</a>
+				<!-- IF post.GYM_ACTIVITE != REQUEST_ID_ACTIVITE -->
+					<a href="viewtopic.php?p={post.GYM_ACTIVITE}">{post.POST_SUBJECT}</a>
+				<!-- ELSE -->
+					{post.POST_SUBJECT}
+				<!-- ENDIF -->
+
 				<!-- IF post.GYM_CERT -->
 					<a href="https://www.oncorif.fr/prescriforme-lactivite-physique-sur-ordonnance-en-ile-de-france/"
 						target="_blank" class="cert" title="Cours certifié Prescri’forme"

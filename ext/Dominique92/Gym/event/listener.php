@@ -7,6 +7,10 @@
  */
 
 /*
+//TODO bandeau accueil déroulé sauf pages
+//APRES planning mercredi + dimanche même page
+//BEST lien document => download au lieu d'afficher
+
 //BEST
 traduire TOPIC_ID => le n° du topic dans (INCLUDE
 Glissement latéral pages
