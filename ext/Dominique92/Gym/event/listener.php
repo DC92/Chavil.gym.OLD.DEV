@@ -7,8 +7,13 @@
  */
 
 /*
+//TODO masquer les sous-menus sauf la page vue / survol / ouverture lente
+//TODO purger les [resume] et textes des pages seances
 //TODO bandeau accueil déroulé sauf pages
+//BUG null au dessus d'une carte sur IE
 //APRES planning mercredi + dimanche même page
+//APRES enlever horaire du menu / réordonner menu
+//BEST pavés du menu de la stricte taille nécéssaire
 //BEST lien document => download au lieu d'afficher
 
 //BEST
@@ -530,6 +535,8 @@ class listener implements EventSubscriberInterface
 				$first['COULEUR'] = $this->couleur ();
 				$first['COULEUR_FOND'] = $this->couleur (35, 255, 0);
 				$first['COULEUR_BORD'] = $this->couleur (40, 196, 0);
+				$first['COULEUR_TITRE'] = $this->couleur (40, 162, 0);
+//TODO purger les inutiles
 				$first['COUNT'] = count ($v);
 				$this->template->assign_block_vars ('topic', $first);
 

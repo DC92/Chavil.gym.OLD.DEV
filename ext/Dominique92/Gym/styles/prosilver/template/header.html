@@ -61,3 +61,27 @@
 		</a>
 	</h1>
 </div>
+
+<ul class="menubandeau">
+	<!-- BEGIN topic -->
+	<!-- IF topic.FIRST_GYM_MENU -->
+	<li style="background:{topic.COULEUR}">
+		<label style="background:{topic.COULEUR_TITRE}">{topic.TOPIC_TITLE}</label>
+
+		<!-- IF topic.COUNT > 1 -->
+		<ul>
+			<!-- BEGIN post -->
+			<!-- IF post.GYM_MENU and post.TOPIC_FIRST_POST_ID != post.POST_ID -->
+				<li>
+				<a title = "Voir la fiche {post.POST_SUBJECT}" href="viewtopic.php?p={post.POST_ID}">
+					{post.POST_SUBJECT}
+				</a>
+				</li>
+			<!-- ENDIF -->
+			<!-- END post -->
+		</ul>
+		<!-- ENDIF -->
+	</li>
+	<!-- ENDIF -->
+	<!-- END topic -->
+</ul>

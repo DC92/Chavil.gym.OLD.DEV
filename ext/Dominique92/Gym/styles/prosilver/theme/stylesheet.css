@@ -255,6 +255,36 @@ body {
 }
 
 /* Menu accueil et sous-menu pages */
+.menubandeau {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+.titi {
+	margin-top: 1em;
+	padding: 0;
+}
+.menubandeau label {
+	display: block;
+	margin: -0.5em -0.5em 0.1em -0.5em;
+	border-radius: 0.5em;
+	padding: 0.2em;
+	color: white;
+}
+.menubandeau > li {
+	display: inline-block;
+	margin: 0.5em;
+	border-radius: 0.5em;
+	padding: 0.5em;
+}
+.menubandeau ul {
+	padding: 0;
+}
+.menubandeau ul li {
+	list-style: none;
+}
+
+/* //TODO DELETE
 .gym-index ul.menu,
 .gym-viewtopic .page ul.menu {
 	display: flex;
@@ -295,7 +325,7 @@ body {
 }
 .gym .menu ul li {
 	margin: 0.2em;
-}
+}*/
 
 /* Slideshow */
 .slideshow {
