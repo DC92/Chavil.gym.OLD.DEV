@@ -1,16 +1,10 @@
 <?php
 /**
- * Add usefull tricks to for phpBB
+ * Usefull tricks to for phpBB
  *
- * Includes language and style files of this extension
- * Clickable banner
- * Prevent an empty post title or text
- * Warning to wait until end loading of attached files
- * Log posts edit
- *
- * DEBUG :
- * Disable Varnish
- * List template vars
+ * Clickable banner (overall_header_searchbox_before.html)
+ * Warning to wait until end loading of attached files (posting_attach_body_file_list_before.html)
+ * See other docs lines bellow
  *
  * @copyright (c) 2020 Dominique Cavailhez
  * @license GNU General Public License, version 2 (GPL-2.0)
@@ -42,54 +36,54 @@ class listener implements EventSubscriberInterface
 		$this->user = $user;
 		$this->language = $language;
 
-		// Include language files of this extension
+/**
+ * Includes language files of this extension
+ */
 		$ns = explode ('\\', __NAMESPACE__);
 		$this->language->add_lang('common', $ns[0].'/'.$ns[1]);
+
+/**
+ * Includes style files of this extension
+ */
+//TODO explore all active extensions
+//TODO bug acp_main.html
+/*
+		$this->ext_path = 'ext/'.$ns[0].'/'.$ns[1].'/';
+		$template->set_style ([
+			$this->ext_path.'styles',
+			'styles', // core styles
+			'adm', // core styles
+		]);
+*/
 	}
 
 	// List of hooks and related functions
 	// We find the calling point by searching in the software of PhpBB 3.x: "event core.<XXX>"
 	static public function getSubscribedEvents() {
 
-		// For debug, Varnish will not be caching pages where you are setting a cookie
+/**
+ * For debug, Varnish will not be caching pages where you are setting a cookie
+ */
 		if (defined('DEBUG_CONTAINER'))
 			setcookie('disable-varnish', microtime(true), time()+600, '/');
 
 		return [
-			// All
-			'core.page_header' => 'page_header',
-			'core.twig_environment_render_template_before' => 'twig_environment_render_template_before',
-
 			// Posting
 			'core.posting_modify_submission_errors' => 'posting_modify_submission_errors',
 			'core.posting_modify_template_vars' => 'posting_modify_template_vars',
 			'core.modify_submit_notification_data' => 'modify_submit_notification_data',
+
+			// All
+			'core.twig_environment_render_template_before' => 'twig_environment_render_template_before',
 		];
 	}
 
-	function page_header() {
-//*DCMM*/echo"<pre style='background:white;color:black;font-size:14px'>REQUEST_URI = ".var_export($this->request->get_super_global(\phpbb\request\request_interface::SERVER)['REQUEST_URI'],true).'</pre>';
-//*DCMM*/echo"<pre style='background:white;color:black;font-size:14px'>COOKIE = ".var_export($this->request->get_super_global(\phpbb\request\request_interface::COOKIE),true).'</pre>';
-	}
-
-	function twig_environment_render_template_before($vars) {
-		// Display the template variables
-/*DCMM*/return;
-		if($vars['name'] != 'attachment.html') {
-			echo '<p><b>TEMPLATE '.$vars['name'].' : '.count($vars['context']).' variables</b></p>';
-			foreach($vars['context'] AS $k=>$v)
-				if (gettype ($v) != 'object')
-					echo"<pre>$k (".gettype ($v).") = ".var_export($v,true).'</pre>';
-		}
-	}
-
-	/**
-		POSTING.PHP
-	*/
+/**
+ * Allows entering a POST with empty text
+ */
 	function posting_modify_submission_errors($vars) {
 		$error = $vars['error'];
 
-		// Allows entering a POST with empty text
 		foreach ($error AS $k=>$v)
 			if ($v == $this->user->lang['TOO_FEW_CHARS'])
 				unset ($error[$k]);
@@ -100,15 +94,21 @@ class listener implements EventSubscriberInterface
 	// Called when viewing the post page
 	function posting_modify_template_vars($vars) {
 		$post_data = $vars['post_data'];
+
+/**
+ * Prevent an empty title to invalidate the full page and input.
+ */
 		$page_data = $vars['page_data'];
 
-		// Prevent an empty title to invalidate the full page and input.
 		if (!$post_data['post_subject'])
 			$page_data['DRAFT_SUBJECT'] = $this->post_name ?: 'New';
 
-		// Keep trace of values prior to modifications
-		// Create a log file with the post existing data if there is none
+		$vars['page_data'] = $page_data;
 
+/**
+ * Keep trace of values prior to modifications
+ * Create a log file with the post existing data if there is none
+ */
 		// Create the LOG directory if none
 		if (!is_dir('LOG'))
 			mkdir('LOG');
@@ -126,15 +126,15 @@ class listener implements EventSubscriberInterface
 				$this->specific_data($post_data).PHP_EOL
 			);
 
-		$vars['page_data'] = $page_data;
 	}
 
-	// Called after the post validation
+/**
+ * Log new post data
+ */
 	function modify_submit_notification_data($vars) {
 		$post_data = $vars['data_ary'];
 		$post = $this->request->get_super_global(\phpbb\request\request_interface::POST);
 
-		// Log new post data
 		$file_name = 'LOG/'.$post_data['post_id'].'.txt';
 		file_put_contents ($file_name,
 			'_______________________________'.PHP_EOL.
@@ -157,4 +157,29 @@ class listener implements EventSubscriberInterface
 				$r .= $k.': '.(is_array($v) ? implode(',',$v) : $v).PHP_EOL;
 		return $r;
 	}
+
+/**
+ * DEBUG
+ * Dump global & templates variables
+ * Uncomment these lines
+ */
+	function twig_environment_render_template_before($vars) {
+//		var_dump ('COOKIES', $this->request->get_super_global(\phpbb\request\request_interface::COOKIE));
+
+//		if($vars['name'] != 'attachment.html')
+//			var_dump('TEMPLATE '.$vars['name'], $vars['context']);
+	}
+
+/**
+ * Short link /?f=0&t=0&p=0 to viewforum & viewtopic
+ * Add these lines at the end of /.htaccess
+ *
+RewriteCond %{REQUEST_FILENAME} index.php
+RewriteCond %{QUERY_STRING} (^|&)f=[0-9]+(&|$)
+RewriteRule ^(.*)$ viewforum.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} index.php
+RewriteCond %{QUERY_STRING} (^|&)(t|p)=[0-9]+(&|$)
+RewriteRule ^(.*)$ viewtopic.php [QSA,L]
+ */
 }
