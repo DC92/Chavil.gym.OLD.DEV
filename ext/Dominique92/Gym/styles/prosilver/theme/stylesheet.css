@@ -78,6 +78,10 @@ body {
 .gym .banniere h1 a:hover {
 	color: black;
 }
+.gym .logo {
+	position: absolute;
+	top: 0;
+}
 .gym .logo img {
 	width: calc(45px + 3vw);
 	float: left;
@@ -91,7 +95,7 @@ body {
 	display: none;
 	position: absolute;
 	left: calc(45px + 3vw);
-	margin: 0;
+	margin: 0 0 0 5em;
 	padding: 0.3em;
 	text-align: left;
 	background: white;
@@ -255,73 +259,54 @@ body {
 }
 
 /* Menu accueil et sous-menu pages */
-.menu {
+.gym .menu {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
+	padding: 0;
 }
-.menu div {
-	display: inline-block;
-	margin: 0.5em;
-	border-radius: 0.5em;
-	padding: 0.5em;
-}
-.menu label {
+.gym .menu > li > a {
 	display: block;
-	margin: -0.5em -0.5em 0.1em -0.5em;
+	margin: 0;
 	border-radius: 0.5em;
-	padding: 0.2em;
-	color: white;
-}
-.menu ul {
-	padding: 0;
-}
-.menu li {
-	list-style: none;
-}
-
-/* //TODO DELETE
-.gym-index ul.menu,
-.gym-viewtopic .page ul.menu {
-	display: flex;
-	padding: 0;
-	justify-content: space-around;
-	flex-wrap: wrap;
-	margin-top: 1em;
-}
-.gym-viewtopic > ul.menu {
-	margin-top: 1em;
-}
-.gym .menu > li {
-	display: inline-block;
-	padding: 0.8em;
-	border-radius: 1.8em;
-	font-weight: bold;
-	margin-bottom: 1em;
-}
-.gym .menu li,
-.gym .menu a {
-	color: black;
-	list-style: none;
-}
-.gym .menu a:hover {
-	background : blue;
+	padding: 0.3em;
 	color: white;
 }
 .gym .menu ul {
-	display: none;
+	border-radius: 0.5em;
+	padding: 0.3em;
+}
+.gym .menu li {
+	margin: 0;
+	padding: 0.1em;
+	list-style: none;
+}
+.gym .replie ul {
+	z-index: 1;
 	position: absolute;
 	padding: 0.3em;
-	border-radius: 1em;
-	font-weight: initial;
-	z-index: 5;
 }
-.gym .menu li:hover ul {
+.gym .replie li ul li {
+	display: none;
+	white-space: nowrap ;
+}
+.gym .replie li:hover ul li {
+	display: block;
+}
+.gym .menu-select {
 	display: block !important;
 }
-.gym .menu ul li {
-	margin: 0.2em;
-}*/
+.gym li ul li.menu-select a {
+	margin: -0.4em;
+	padding: 0.4em;
+	border-radius: 0.5em;
+	background: yellow;
+	color: black;
+	font-weight: bold;
+}
+.gym li:hover ul li.menu-select a {
+	padding: 0;
+}
 
 /* Slideshow */
 .slideshow {

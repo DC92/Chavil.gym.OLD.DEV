@@ -62,27 +62,28 @@
 	</h1>
 </div>
 
-<ul class="menu">
+<ul class="menu <!-- IF REQUEST_T or REQUEST_P -->replie<!-- ENDIF -->">
 	<!-- BEGIN topic -->
 	<!-- IF topic.FIRST_GYM_MENU -->
 	<li>
-		<div style="background:{topic.COULEUR}">
-			<label style="background:{topic.COULEUR_TITRE}">{topic.TOPIC_TITLE}</label>
+		<a href="viewtopic.php?t={topic.TOPIC_ID}" style="background:{topic.COULEUR_TITRE}">{topic.TOPIC_TITLE}</a>
 
-			<!-- IF topic.COUNT > 1 -->
-			<ul>
-				<!-- BEGIN post -->
-				<!-- IF post.GYM_MENU and post.TOPIC_FIRST_POST_ID != post.POST_ID -->
-					<li>
-					<a title = "Voir la fiche {post.POST_SUBJECT}" href="viewtopic.php?p={post.POST_ID}">
-						{post.POST_SUBJECT}
-					</a>
-					</li>
-				<!-- ENDIF -->
-				<!-- END post -->
-			</ul>
+		<!-- IF topic.COUNT > 1 -->
+		<ul style="background:{topic.COULEUR}">
+			<!-- BEGIN post -->
+			<!-- IF post.GYM_MENU and post.TOPIC_FIRST_POST_ID != post.POST_ID -->
+				<li <!-- IF REQUEST_P == post.POST_ID -->
+						class="menu-select"
+					<!-- ENDIF -->
+				>
+				<a title = "Voir la fiche {post.POST_SUBJECT}" href="viewtopic.php?p={post.POST_ID}">
+					{post.POST_SUBJECT}
+				</a>
+				</li>
 			<!-- ENDIF -->
-		</div>
+			<!-- END post -->
+		</ul>
+		<!-- ENDIF -->
 	</li>
 	<!-- ENDIF -->
 	<!-- END topic -->
