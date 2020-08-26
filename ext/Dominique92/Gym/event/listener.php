@@ -535,7 +535,7 @@ class listener implements EventSubscriberInterface
 				$first['COULEUR'] = $this->couleur ();
 				$first['COULEUR_FOND'] = $this->couleur (35, 255, 0);
 				$first['COULEUR_BORD'] = $this->couleur (40, 196, 0);
-				$first['COULEUR_TITRE'] = $this->couleur (40, 162, 0);
+				$first['COULEUR_TITRE'] = $this->couleur (80, 162, 0);
 //TODO purger les inutiles
 				$first['COUNT'] = count ($v);
 				$this->template->assign_block_vars ('topic', $first);
@@ -543,11 +543,12 @@ class listener implements EventSubscriberInterface
 				// Tri du 2" niveau
 				ksort ($v, SORT_STRING);
 				foreach ($v AS $kv=>$vv) {
+/*//TODO DELETE
 					if ($topic){
 						$vv['COULEUR'] = $this->couleur ();
 						$vv['COULEUR_FOND'] = $this->couleur (35, 255, 0);
 						$vv['COULEUR_BORD'] = $this->couleur (40, 196, 0);
-					}
+					}*/
 					$this->template->assign_block_vars ('topic.post', $vv);
 				}
 			}

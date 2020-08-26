@@ -45,7 +45,8 @@ body {
 	padding: 0;
 	background: white;
 	font-family: arial, sans-serif;
-/*	background-image: url("./images/fond.jpg");
+/*//TODO DELETE ?
+	background-image: url("./images/fond.jpg");
 	background-size: cover;
 	background-position: center center;*/
 }
@@ -54,7 +55,8 @@ body {
 	margin-top: 2em;
 	font-size: 0.7em;
 }
-/*@media (max-width: 600px) {
+/*//TODO DELETE ?
+@media (max-width: 600px) {
 	body.gym  {
 		background-image: none;
 	}
@@ -281,31 +283,40 @@ body {
 	padding: 0.1em;
 	list-style: none;
 }
+/* //TODO BUG mettre une hauteur min */
 .gym .replie ul {
 	z-index: 1;
 	position: absolute;
+	padding: 0;
+}
+.gym .replie li:hover ul {
 	padding: 0.3em;
+}
+.gym .replie li ul {
+	margin: 0.3em;
+}
+.gym .replie li:hover ul {
+	margin: 0;
 }
 .gym .replie li ul li {
 	display: none;
 	white-space: nowrap ;
 }
-.gym .replie li:hover ul li {
-	display: block;
-}
+.gym .replie li:hover ul li,
 .gym .menu-select {
 	display: block !important;
 }
-.gym li ul li.menu-select a {
-	margin: -0.4em;
-	padding: 0.4em;
+.gym li ul li.menu-select {
+	margin: -0.3em;
+	padding: 0.3em;
 	border-radius: 0.5em;
 	background: yellow;
 	color: black;
 	font-weight: bold;
 }
-.gym li:hover ul li.menu-select a {
-	padding: 0;
+.gym li:hover ul li.menu-select {
+	margin: 0;
+	padding: 0.1em;
 }
 
 /* Slideshow */

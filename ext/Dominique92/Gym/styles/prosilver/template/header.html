@@ -72,14 +72,17 @@
 		<ul style="background:{topic.COULEUR}">
 			<!-- BEGIN post -->
 			<!-- IF post.GYM_MENU and post.TOPIC_FIRST_POST_ID != post.POST_ID -->
-				<li <!-- IF REQUEST_P == post.POST_ID -->
-						class="menu-select"
-					<!-- ENDIF -->
-				>
-				<a title = "Voir la fiche {post.POST_SUBJECT}" href="viewtopic.php?p={post.POST_ID}">
-					{post.POST_SUBJECT}
-				</a>
-				</li>
+				<!-- IF REQUEST_P == post.POST_ID -->
+					<li class="menu-select">
+						{post.POST_SUBJECT}
+					</li>
+				<!-- ELSE -->
+					<li>
+						<a title = "Voir la fiche {post.POST_SUBJECT}" href="viewtopic.php?p={post.POST_ID}">
+							{post.POST_SUBJECT}
+						</a>
+					</li>
+				<!-- ENDIF -->
 			<!-- ENDIF -->
 			<!-- END post -->
 		</ul>
