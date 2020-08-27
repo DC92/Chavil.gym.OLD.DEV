@@ -7,13 +7,12 @@
  */
 
 /*
-//TODO c'est quoi submenu.html ?
-//TODO masquer les sous-menus sauf la page vue / survol / ouverture lente
+//TODO page affiche automatiquement horaires
 //TODO purger les [resume] et textes des pages seances
-//TODO bandeau accueil déroulé sauf pages
 //BUG null au dessus d'une carte sur IE
 //APRES planning mercredi + dimanche même page
 //APRES enlever horaire du menu / réordonner menu
+//BEST ouverture lente sous-menus
 //BEST lien document => download au lieu d'afficher
 
 //BEST
@@ -243,7 +242,8 @@ class listener implements EventSubscriberInterface
 		$post_data = $this->all_post_data[$post_id] ?: [];
 		$topic_data = $vars['topic_data'];
 
-		if ($post_id == $this->request->variable('p', 0))
+		if ($post_id == $this->request->variable('p', 0) &&
+			is_numeric($post_data['gym_activite']))
 			$this->template->assign_var ('GYM_ACTIVITE', $post_data['gym_activite']);
 
 		// Assign some values to template
