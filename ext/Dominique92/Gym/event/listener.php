@@ -7,7 +7,6 @@
  */
 
 /*
-//TODO page affiche automatiquement horaires
 //TODO purger les [resume] et textes des pages seances
 //BUG null au dessus d'une carte sur IE
 //APRES planning mercredi + dimanche même page
@@ -191,7 +190,12 @@ class listener implements EventSubscriberInterface
 					switch ($match[1]) {
 						// (INCLUDE relative_url) replace this string by the url content
 						case 'INCLUDE':
-							return file_get_contents ($url.'&mod='.$this->auth->acl_get('m_'));
+							return file_get_contents (
+								$url.
+								'&it='.$this->request->variable('t',0).
+								'&ip='.$this->request->variable('p',0).
+								'&mod='.$this->auth->acl_get('m_')
+							);
 
 						// (LOCATION relative_url) replace this page by the url
 						case 'LOCATION':
@@ -244,7 +248,7 @@ class listener implements EventSubscriberInterface
 
 		if ($post_id == $this->request->variable('p', 0) &&
 			is_numeric($post_data['gym_activite']))
-			$this->template->assign_var ('GYM_ACTIVITE', $post_data['gym_activite']);
+			$this->template->assign_var ('GYM_ACTIVITE', $post_data['gym_activite']); //TODO INDISPENSABLE ?????
 
 		// Assign some values to template
 		$post_row['TOPIC_FIRST_POST_ID'] = $topic_data['topic_first_post_id'];
@@ -401,15 +405,17 @@ class listener implements EventSubscriberInterface
 		$post_id = $this->request->variable('id', '', true);
 		if ($post_id)
 			$cond[] = 'p.post_id='.$post_id;
-		$activite = $this->request->variable('activite', '', true);
-		if ($activite)
-			$cond[] = 'ac.post_subject="'.urldecode($activite).'"';
-		$lieu = $this->request->variable('lieu', '', true);
-		if ($lieu)
-			$cond[] = 'li.post_subject="'.urldecode($lieu).'"';
-		$animateur = $this->request->variable('animateur', '', true);
-		if ($animateur)
-			$cond[] = 'an.post_subject="'.urldecode($animateur).'"';
+
+		$request_it = $this->request->variable('it', 0);
+		$request_ip = $this->request->variable('ip', 0);
+		if ($request_it == 2)
+			$cond[] = 'ac.post_id='.$request_ip;
+		elseif ($request_it == 3)
+			$cond[] = 'li.post_id='.$request_ip;
+		elseif ($request_it == 4)
+			$cond[] = 'an.post_id='.$request_ip;
+		elseif ($request_it != 8 && $request_it) // Horaires
+			$cond[] = 'FALSE';
 
 		// Récupère la table de tous les attachements pour les inclusions BBCode
 		$sql = 'SELECT * FROM '. ATTACHMENTS_TABLE .' ORDER BY attach_id DESC, post_msg_id ASC';

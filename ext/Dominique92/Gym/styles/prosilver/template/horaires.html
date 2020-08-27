@@ -16,7 +16,7 @@
 		<tr>
 			<!-- IF not REQUEST_ID -->
 			<td>
-				<!-- IF post.GYM_ACTIVITE != REQUEST_ID_ACTIVITE -->
+				<!-- IF post.GYM_ACTIVITE != REQUEST_P -->
 					<a href="viewtopic.php?p={post.GYM_ACTIVITE}">{post.POST_SUBJECT}</a>
 				<!-- ELSE -->
 					{post.POST_SUBJECT}
@@ -28,7 +28,7 @@
 					>CERT</a>
 				<!-- ENDIF -->
 
-				<!-- IF REQUEST_ACTIVITE and post.GYM_NOTA -->
+				<!-- IF post.GYM_NOTA -->
 					<br>{post.GYM_NOTA}
 				<!-- ENDIF -->
 			</td>
@@ -38,7 +38,7 @@
 				{post.HORAIRE_DEBUT} à {post.HORAIRE_FIN}
 			</td>
 
-			<!-- IF not REQUEST_LIEU -->
+			<!-- IF REQUEST_T != 3 -->
 			<td>
 				<a href="viewtopic.php?p={post.GYM_LIEU}">
 					{post.LIEU}
@@ -46,7 +46,7 @@
 			</td>
 			<!-- ENDIF -->
 
-			<!-- IF not REQUEST_ANIMATEUR -->
+			<!-- IF REQUEST_T != 4 -->
 			<td>
 				<a href="viewtopic.php?p={post.GYM_ANIMATEUR}">
 					{post.ANIMATEUR}
