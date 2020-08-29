@@ -1,9 +1,5 @@
 <!-- INCLUDE header.html -->
 
-<script>
-	var annee_debut = {ANNEE_DEBUT};
-</script>
-
 <!-- IF wwwwGYM_ACTIVITE -->
 //TODO DELETE
 	(LOCATION viewtopic.php?p={GYM_ACTIVITE})
@@ -118,7 +114,7 @@
 </ul>
 
 <div class="page">
-<b> //TODO RUBRIQUE </b>
+<b> //TODO RUBRIQUE OK horaires !</b>
 	<!-- RUBRIQUE -->
 	<!-- BEGIN postrow -->
 		<!-- IF not REQUEST_P and postrow.POST_ID == postrow.TOPIC_FIRST_POST_ID and REQUEST_P != postrow.TOPIC_FIRST_POST_ID and postrow.GYM_MENU -->
@@ -135,9 +131,9 @@
 		<!-- ENDIF -->
 	<!-- END postrow -->
 
-<b> //TODO  ACTIVITE </b>
+<b> //TODO ACTIVITE </b>
 	<!-- ACTIVITE -->
-	<!-- BEGIN topic -->
+	<!-- BEGIN wwwwwwtopic -->
 	<!-- BEGIN post -->
 	<!-- IF post.POST_ID == GYM_ACTIVITE and post.RESUME -->
 		<h2>
@@ -149,11 +145,14 @@
 				</a>
 			<!-- ENDIF -->
 		</h2>
+AAA:RESUME
 		<div>{post.RESUME}</div>
+ZZZ
 	<!-- ENDIF -->
 	<!-- END post -->
 	<!-- END topic -->
 
+<b> //TODO SUJET </b>
 	<!-- SUJET -->
 	<!-- BEGIN postrow -->
 		<!-- IF postrow.POST_ID == REQUEST_P -->
@@ -178,10 +177,11 @@
 		<!-- ENDIF -->
 	<!-- END postrow -->
 
+<b> //TODO HORAIRES </b>
 	<!-- HORAIRES -->
 	(INCLUDE ?template=horaires)
 
-<b> //TODO  ANIMATRICES </b>
+<b> //TODO ANIMATRICES oui page Equipe</b>
 	<!-- ANIMATRICES -->
 	<!-- BEGIN topic -->
 	<!-- BEGIN post -->

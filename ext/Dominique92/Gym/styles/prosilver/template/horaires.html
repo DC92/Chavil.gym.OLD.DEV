@@ -40,17 +40,25 @@
 
 			<!-- IF REQUEST_T != 3 -->
 			<td>
+				<!-- IF post.GYM_LIEU != REQUEST_IP -->
 				<a href="viewtopic.php?p={post.GYM_LIEU}">
 					{post.LIEU}
 				</a>
+				<!-- ELSE -->
+					{post.LIEU}
+				<!-- ENDIF -->
 			</td>
 			<!-- ENDIF -->
 
 			<!-- IF REQUEST_T != 4 -->
 			<td>
+				<!-- IF post.GYM_ANIMATEUR != REQUEST_IP -->
 				<a href="viewtopic.php?p={post.GYM_ANIMATEUR}">
 					{post.ANIMATEUR}
 				</a>
+				<!-- ELSE -->
+					{post.ANIMATEUR}
+				<!-- ENDIF -->
 			</td>
 			<!-- ENDIF -->
 
