@@ -7,12 +7,12 @@
  */
 
 /*
+//TODO BUG voir survol planning equipe
+//TODO BUG BEST enlever lien page une activité -> revient vers le lien
 //TODO purger les [resume] et textes des pages seances
 //TODO Sitemap / SEO
-//TODO enlever recompile templates
+//TODO enlever recompile templates / purge cache
 //BUG null au dessus d'une carte sur IE
-//APRES planning mercredi + dimanche même page
-//APRES enlever horaire du menu / réordonner menu
 //BEST ouverture lente sous-menus
 //BEST lien document => download au lieu d'afficher
 	//BEST plaquette & inscriptions => page attachment
@@ -166,7 +166,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-		Expansion des "BBCodes" maisons : (CLE valeur)
+		Expansion des "BBCodes" maisons : (INCLUDE|LOCATION valeur)
 	*/
 	function twig_environment_render_template_after($vars) {
 		if ($vars['name'] == 'index_body.html' ||
@@ -247,9 +247,11 @@ class listener implements EventSubscriberInterface
 		$post_data = $this->all_post_data[$post_id] ?: [];
 		$topic_data = $vars['topic_data'];
 
+/*//TODO DELETE ???
 		if ($post_id == $this->request->variable('p', 0) &&
 			is_numeric($post_data['gym_activite']))
 			$this->template->assign_var ('GYM_ACTIVITE', $post_data['gym_activite']); //TODO INDISPENSABLE ?????
+*/
 
 		// Assign some values to template
 		$post_row['TOPIC_FIRST_POST_ID'] = $topic_data['topic_first_post_id'];
@@ -409,11 +411,11 @@ class listener implements EventSubscriberInterface
 
 		$request_it = $this->request->variable('it', 0);
 		$request_ip = $this->request->variable('ip', 0);
-		if ($request_it == 2)
+		if ($request_it == 2 && $request_ip)
 			$cond[] = 'ac.post_id='.$request_ip;
-		elseif ($request_it == 3)
+		elseif ($request_it == 3 && $request_ip)
 			$cond[] = 'li.post_id='.$request_ip;
-		elseif ($request_it == 4)
+		elseif ($request_it == 4 && $request_ip)
 			$cond[] = 'an.post_id='.$request_ip;
 
 		// Récupère la table de tous les attachements pour les inclusions BBCode
@@ -541,14 +543,15 @@ class listener implements EventSubscriberInterface
 				$first['COULEUR_FOND'] = $this->couleur (35, 255, 0);
 				$first['COULEUR_BORD'] = $this->couleur (40, 196, 0);
 				$first['COULEUR_TITRE'] = $this->couleur (80, 162, 0);
-//TODO purger les inutiles
 				$first['COUNT'] = count ($v);
 				$this->template->assign_block_vars ('topic', $first);
 
 				// Tri du 2" niveau
 				ksort ($v, SORT_STRING);
-				foreach ($v AS $kv=>$vv)
+				foreach ($v AS $kv=>$vv) { // Pour submenu
+					$vv['COULEUR'] = $this->couleur ();
 					$this->template->assign_block_vars ('topic.post', $vv);
+				}
 			}
 		}
 	}
