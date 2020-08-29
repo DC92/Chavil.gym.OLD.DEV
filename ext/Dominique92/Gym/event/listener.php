@@ -199,7 +199,7 @@ class listener implements EventSubscriberInterface
 
 						// (LOCATION relative_url) replace this page by the url
 						case 'LOCATION':
-							header ('Location: '.$url);
+							header ('Location: '.urldecode($url));
 							exit;
 					}
 					// Sinon, on ne fait rien
@@ -472,7 +472,7 @@ class listener implements EventSubscriberInterface
 			if($row['gym_scolaire'] == 'on')
 				$row['gym_semaines'] = $this->semaines;
 
-			if($row['gym_semaines']) {
+			if($row['gym_semaines'] && !$row['gym_menu']) {
 				setlocale(LC_ALL, 'fr_FR');
 				$row['next_end_time'] = INF;
 				foreach (explode (',', $row['gym_semaines']) AS $s) {
@@ -518,12 +518,12 @@ class listener implements EventSubscriberInterface
 				$this->request->variable('template', '') == 'horaires' ?
 					$row['gym_jour'] // Horaires
 				:
-					$row['first_gym_ordre_menu']. // Menu
-					$row['next_beg_time']. // Actualité
+					$row['first_gym_ordre_menu'].'*'. // Menu
+					$row['next_beg_time'].'*'. // Actualité
 					$row['topic_id'] // Pour séparer les topics dans les menus
 			][
-				$row['gym_ordre_menu']. // Horaires
-				$row['horaire_debut'].
+				$row['gym_ordre_menu'].'*'. // Horaires
+				$row['horaire_debut'].'*'.
 				$row['post_id'] // Pour séparer les exeaco
 			] = array_change_key_case ($row, CASE_UPPER);
 		}
