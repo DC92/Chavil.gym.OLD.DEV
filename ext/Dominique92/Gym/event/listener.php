@@ -8,16 +8,20 @@
 
 /*
 //TODO purger les [resume] et textes des pages seances
+//TODO Sitemap / SEO
+//TODO enlever recompile templates
 //BUG null au dessus d'une carte sur IE
 //APRES planning mercredi + dimanche même page
 //APRES enlever horaire du menu / réordonner menu
 //BEST ouverture lente sous-menus
 //BEST lien document => download au lieu d'afficher
+	//BEST plaquette & inscriptions => page attachment
+//BEST n'inclure OL que quand il y a une carte
 
 //BEST
 traduire TOPIC_ID => le n° du topic dans (INCLUDE
 Glissement latéral pages
-Lien gmaps 
+Lien gmaps
 Diaporama pas vu depuis un moment boucle rapidement
 Bug d'affichage avec &hilit=body (résultat recherche)
 	http://c92.fr/gymtest/viewtopic.php?f=2&t=1&p=18&hilit=body#p18
@@ -27,14 +31,6 @@ Redimensionner les images suivant taille fenetre
 Bouton imprimer calendier
 	style print
 Erradiquer f=2
-
-//APRES
-Sitemap
-enlever @define('DEBUG_CONTAINER', true);
-Enlever la banière jaune et le décallage de la connexion admin
-enlever recompile templates
-enlever le .robot et faire un SEO
-mettre redir 301 free
 */
 
 /** CONFIG
@@ -419,8 +415,6 @@ class listener implements EventSubscriberInterface
 			$cond[] = 'li.post_id='.$request_ip;
 		elseif ($request_it == 4)
 			$cond[] = 'an.post_id='.$request_ip;
-		elseif ($request_it != 8 && $request_it) // Horaires
-			$cond[] = 'FALSE';
 
 		// Récupère la table de tous les attachements pour les inclusions BBCode
 		$sql = 'SELECT * FROM '. ATTACHMENTS_TABLE .' ORDER BY attach_id DESC, post_msg_id ASC';
@@ -451,7 +445,7 @@ class listener implements EventSubscriberInterface
 			// Clean non selected values
 			foreach ($row AS $k=>$v)
 				if ($v == 'off' || $v == '?')
-					unset($row[$k]); 
+					unset($row[$k]);
 
 			// BBCodes et attachements
 			$row['display_text'] = generate_text_for_display(
@@ -553,15 +547,8 @@ class listener implements EventSubscriberInterface
 
 				// Tri du 2" niveau
 				ksort ($v, SORT_STRING);
-				foreach ($v AS $kv=>$vv) {
-/*//TODO DELETE
-					if ($topic){
-						$vv['COULEUR'] = $this->couleur ();
-						$vv['COULEUR_FOND'] = $this->couleur (35, 255, 0);
-						$vv['COULEUR_BORD'] = $this->couleur (40, 196, 0);
-					}*/
+				foreach ($v AS $kv=>$vv)
 					$this->template->assign_block_vars ('topic.post', $vv);
-				}
 			}
 		}
 	}
