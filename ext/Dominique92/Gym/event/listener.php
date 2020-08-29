@@ -187,6 +187,11 @@ class listener implements EventSubscriberInterface
 					);
 					$url = 'http://'.implode ('/', $uris);
 
+					// Cas où le paramètre est une url bbcodisée
+					$match_url = explode ('"', $match[2]);
+					if ($match_url[0] == '<a href=')
+						$url = $match_url[1];
+
 					switch ($match[1]) {
 						// (INCLUDE relative_url) replace this string by the url content
 						case 'INCLUDE':
