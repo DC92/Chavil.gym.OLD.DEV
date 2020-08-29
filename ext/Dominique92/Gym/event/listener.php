@@ -283,8 +283,8 @@ class listener implements EventSubscriberInterface
 
 		// Set specific variables
 		foreach ($post_data AS $k=>$v)
-			if (!strncmp ($k, 'gym', 3) && $v) {
-				$this->template->assign_var (strtoupper ($k), $v);
+			if (!strncmp ($k, 'gym', 3)) {
+				$this->template->assign_var (strtoupper ($k), $v ?: 0);
 				$data[$k] = explode (',', $v); // Expand grouped values
 			}
 
