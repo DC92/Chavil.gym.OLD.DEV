@@ -1,25 +1,24 @@
 //APRES enlever recompile templates / purge cache
-//TODO changer le logo (masque acceuil)
+//APRES refaire git Dominique92 / test en DC02
 //TODO test autres explo / mobiles
 //TODO Sitemap / SEO
+//BEST voir autres manques crayons
+//BEST Bouton imprimer calendier / style print
 //BEST BUG null au dessus d'une carte sur IE
 //BEST purger les [resume] et textes des pages seances
-//BEST url réduit viewtopic / ... (htaccess)
-//BEST voir autres manques crayons
 //BEST ouverture lente sous-menus
-//BEST remettre lien supprimer post dans viewtopic
 //BEST lien document => download au lieu d'afficher (plaquette & inscriptions => page attachment)
 //BEST n'inclure OL que quand il y a une carte
-//BEST traduire TOPIC_ID => le n° du topic dans (INCLUDE
-//BEST Glissement latéral pages
 //BEST Lien gmaps
 //BEST BUG Diaporama pas vu depuis un moment boucle rapidement
 //BEST BUG d'affichage avec &hilit=body (résultat recherche)
 	http://c92.fr/gymtest/viewtopic.php?f=2&t=1&p=18&hilit=body#p18
 	" dans le title !
+//BEST traduire TOPIC_ID => le n° du topic dans (INCLUDE
 //BEST Redimensionner les images suivant taille fenetre
 	GYM bbcode photo/n° attachment
-//BEST Bouton imprimer calendier / style print
+//BEST Glissement latéral pages
+//BEST ?? url réduit viewtopic / ... (htaccess)
 
 /** CONFIG
 https://github.com/phpbbmodders/phpBB-3.1-ext-adduser

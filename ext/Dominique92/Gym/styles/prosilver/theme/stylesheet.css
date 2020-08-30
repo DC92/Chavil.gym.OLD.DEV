@@ -8,7 +8,6 @@ pre {
 	background-size: 48px !important;
 	background-image: url("./images/logo.png");
 }
-.section-viewtopic .post-buttons li:not(:first-child),
 #nav-main > li:nth-of-type(2), /* FAQ */
 .section-posting #postingbox .fields1 > dl:first-child, /* Icône de sujet */
 .section-posting #poll-panel-tab, /* Options */
@@ -75,7 +74,7 @@ body {
 	top: 0;
 }
 .gym .logo img {
-	width: calc(45px + 3vw);
+	height: 3.5em;
 	float: left;
 }
 .gym .edit-user {
