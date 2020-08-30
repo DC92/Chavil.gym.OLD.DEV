@@ -6,75 +6,6 @@
  * @license GNU General Public License, version 2 (GPL-2.0)
  */
 
-/*
-//TODO enlever num couleurs submenu car perturbe couleurs du menu bandeau
-//TODO changer le logo (masque acceuil)
-//TODO BUG voir survol planning equipe
-//TODO BUG plus de titre
-
-//TODO mettre crayons menu du haut
-//TODO voir autres manques crayons
-//TODO test autres explo / mobiles
-//TODO BUG BEST enlever lien page une activité -> revient vers le lien
-//TODO purger les [resume] et textes des pages seances
-//TODO Sitemap / SEO
-//TODO enlever recompile templates / purge cache
-//BEST url réduit viewtopic / ...
-//BUG null au dessus d'une carte sur IE
-//BEST ouverture lente sous-menus
-//BEST remettre lien supprimer post dans viewtopic
-//BEST lien document => download au lieu d'afficher
-	//BEST plaquette & inscriptions => page attachment
-//BEST n'inclure OL que quand il y a une carte
-
-//BEST
-traduire TOPIC_ID => le n° du topic dans (INCLUDE
-Glissement latéral pages
-Lien gmaps
-Diaporama pas vu depuis un moment boucle rapidement
-Bug d'affichage avec &hilit=body (résultat recherche)
-	http://c92.fr/gymtest/viewtopic.php?f=2&t=1&p=18&hilit=body#p18
-	" dans le title !
-Redimensionner les images suivant taille fenetre
-	GYM bbcode photo/n° attachment
-Bouton imprimer calendier
-	style print
-Erradiquer f=2
-*/
-
-/** CONFIG
-https://github.com/phpbbmodders/phpBB-3.1-ext-adduser
-https://www.phpbb.com/customise/db/extension/googleanalytics
-copier /slides /files config.php
-
-PERSONNALISER / extension gym
-MEMBRES ET GROUPES / Permissions des groupes / Utilisateurs enregistrés / Permissions avancées / Panneau de l'utilisateur / Peut modifier son nom d’utilisateur
-GENERAL / Fonctionnalités du forum / Autoriser les changements de nom d’utilisateur
-GENERAL / Paramètres des messages / Messages par page : 99
-MESSAGES / Paramètres des fichiers joints / taille téléchargements
-MESSAGES / Gérer les groupes d’extensions des fichiers joints / +Documents -Archives
-MESSAGES / BBCodes / cocher afficher
-	[accueil]{TEXT}[/accueil] / <!--accueil-->{TEXT}<!--accueil--> / Partie de texte à afficher sur le haut de la page d'accueil du site
-	[actualite]{TEXT}[/actualite] / <!--actualite-->{TEXT}<!--actualite--> / Partie de texte à afficher sur le bas de la page d'accueil du site
-	[carte]{TEXT}[/carte] / <br style="clear:both" /><div class="carte">{TEXT}</div> / Insére une carte [carte]longitude, latitude[/carte]
-	[centre]{TEXT}[/centre] / <div style="text-align:center">{TEXT}</div> / Image centrée
-	[doc={TEXT1}]{TEXT2}[/doc] / <a href="download/file.php?id={TEXT1}">{TEXT2}</a> / Lien vers un document
-	[droite]{TEXT}[/droite] / <div class="image-droite">{TEXT}</div> / Affiche une image à droite
-	[gauche]{TEXT}[/gauche] / <div class="image-gauche">{TEXT}</div> / Affiche une image à gauche
-	[page={TEXT1}]{TEXT2}[/page] / <a href="viewtopic.php?p={TEXT1}">{TEXT2}</a> / Lien vers une page
-	[resume]{TEXT}[/resume] / <!--resume-->{TEXT}<!--resume--> / Résumé pour affichage en début de page
-	[presentation]{TEXT}[/presentation] / <!--presentation-->{TEXT}<!--presentation--> / Presentation pour affichage dans la rubrique
-	[rubrique={TEXT1}]{TEXT2}[/rubrique] / <a href="viewtopic.php?t={TEXT1}">{TEXT2}</a> / Lien vers une rubrique
-	[saut_ligne][/saut_ligne] / <br style="clear:both" />
-	[separation][/separation] / <hr/> / Ligne horizontale
-	[surligne]{TEXT}[/surligne] / <span style="background:yellow">{TEXT}</span> / Surligné en jaune
-	[titre1]{TEXT}[/titre1] / <h1>{TEXT}</h1> / Caractères blancs sur fond bleu
-	[titre2]{TEXT}[/titre2] / <h2>{TEXT}</h2> / Caractères noirs sur fond vert
-	[titre3]{TEXT}[/titre3] / <h3>{TEXT}</h3>
-	[titre4]{TEXT}[/titre4] / <h4>{TEXT}</h4>
-	[urlb={TEXT1}]{TEXT2}[/urlb] / <a target="_BLANK" href="{TEXT1}">{TEXT2}</a> / Lien à afficher sur un nouvel onglet
-*/
-
 namespace Dominique92\Gym\event;
 
 if (!defined('IN_PHPBB'))
@@ -557,8 +488,9 @@ class listener implements EventSubscriberInterface
 
 				// Tri du 2" niveau
 				ksort ($v, SORT_STRING);
-				foreach ($v AS $kv=>$vv) { // Pour submenu
-					$vv['COULEUR'] = $this->couleur ();
+				foreach ($v AS $kv=>$vv) {
+					if ($this->request->variable('template', '') == 'submenu')
+						$vv['COULEUR'] = $this->couleur (); // Pour submenu
 					$this->template->assign_block_vars ('topic.post', $vv);
 				}
 			}
