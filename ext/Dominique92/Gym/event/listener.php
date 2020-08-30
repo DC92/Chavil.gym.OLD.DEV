@@ -7,13 +7,22 @@
  */
 
 /*
+//TODO enlever num couleurs submenu car perturbe couleurs du menu bandeau
+//TODO changer le logo (masque acceuil)
 //TODO BUG voir survol planning equipe
+//TODO BUG plus de titre
+
+//TODO mettre crayons menu du haut
+//TODO voir autres manques crayons
+//TODO test autres explo / mobiles
 //TODO BUG BEST enlever lien page une activité -> revient vers le lien
 //TODO purger les [resume] et textes des pages seances
 //TODO Sitemap / SEO
 //TODO enlever recompile templates / purge cache
+//BEST url réduit viewtopic / ...
 //BUG null au dessus d'une carte sur IE
 //BEST ouverture lente sous-menus
+//BEST remettre lien supprimer post dans viewtopic
 //BEST lien document => download au lieu d'afficher
 	//BEST plaquette & inscriptions => page attachment
 //BEST n'inclure OL que quand il y a une carte

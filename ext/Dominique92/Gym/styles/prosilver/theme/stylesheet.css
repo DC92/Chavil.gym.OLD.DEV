@@ -258,12 +258,16 @@ body {
 	justify-content: space-around;
 	padding: 0;
 }
-.gym .menu > li > a {
-	display: block;
+.gym .menu li div {
 	margin: 0;
 	border-radius: 0.5em;
 	padding: 0.3em;
+}
+.gym .menu li div a {
 	color: white;
+}
+.gym .menu li a {
+	text-decoration: none;
 }
 .gym .menu ul {
 	border-radius: 0.5em;
