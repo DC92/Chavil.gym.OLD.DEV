@@ -263,12 +263,6 @@ body {
 	border-radius: 0.5em;
 	padding: 0.3em;
 }
-.gym .menu li div a {
-	color: white;
-}
-.gym .menu li a {
-	text-decoration: none;
-}
 .gym .menu ul {
 	border-radius: 0.5em;
 	padding: 0.3em;
@@ -278,7 +272,22 @@ body {
 	padding: 0.1em;
 	list-style: none;
 }
-/* //TODO BUG mettre une hauteur min */
+
+.gym .menu > li a {
+	color: black;
+}
+.gym .menu > li a:hover,
+.gym .menu > li div a {
+	color: white;
+}
+
+.gym .submenu a {
+	color: black !important;
+}
+.gym .submenu a:hover {
+	color: white !important;
+}
+
 .gym .replie ul {
 	z-index: 1;
 	position: absolute;
@@ -296,6 +305,9 @@ body {
 .gym .replie li ul li {
 	display: none;
 	white-space: nowrap ;
+}
+.gym .replie i {
+	display: none;
 }
 .gym .replie li:hover ul li,
 .gym .menu-select {

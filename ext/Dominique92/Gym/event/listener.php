@@ -400,7 +400,7 @@ class listener implements EventSubscriberInterface
 				parse_attachments($row['forum_id'], $row['display_text'], $attachments[$row['post_id']], $update_count_ary);
 
 			// Extrait des résumé des parties à afficher
-			foreach (['accueil','actualite','resume','presentation'] AS $k) {
+			foreach (['accueil','actualite','presentation'] AS $k) {
 				$vs = explode ("<!--$k-->", $row['display_text']);
 				if (count ($vs) > 1)
 					$row[strtoupper($k)] = $vs[1];
